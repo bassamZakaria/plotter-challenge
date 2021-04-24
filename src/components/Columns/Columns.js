@@ -1,35 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { List, Typography } from 'antd';
 import { getColumns } from '../../api/plotterApi';
 import { v4 as uuidv4 } from 'uuid';
+import { Droppable } from 'react-beautiful-dnd';
+import ColumnListItem from '../ColumnListItem/ColumnItem';
+import { DND } from '../../utils/DnDIds';
 
-const Columns = () => {
-  const [columns, setColumns] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getColumns();
-      if (response?.status === 200) {
-        setColumns(response?.data);
-      }
-    };
-    fetchData();
-  }, []);
-
+const Columns = ({ columns }) => {
   return (
-    <List
-      style={{ height: '100%' }}
-      header={<>Columns</>}
-      bordered
-      dataSource={columns}
-      renderItem={item => (
-        <List.Item key={uuidv4()}>
-          <Typography.Text>
-            {item?.name} {item.function}
-          </Typography.Text>
-        </List.Item>
-      )}
-    />
+    <Droppable droppableId={DND.COLUMNS} key={DND.COLUMNS} isDropDisabled={true}>
+      {provided => {
+        return (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            style={{
+              border: '1px solid black',
+              minWidth: 150,
+              height: '100%',
+            }}
+          >
+            {columns.map((item, index) => (
+              <ColumnListItem item={item} index={index} />
+            ))}
+            {provided.placeholder}
+          </div>
+        );
+      }}
+    </Droppable>
   );
 };
 

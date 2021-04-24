@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import SelectionBoxes from '../../components/SelectionBoxes/SelectionBoxes';
 import LineChart from '../../components/LineChart/LineChart';
 import { getColumns, getData } from '../../api/plotterApi';
-import merge from 'lodash.merge';
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const Plotter = () => {
   const [columns, setColumns] = useState([]);
@@ -48,13 +45,6 @@ const Plotter = () => {
   return (
     <div style={{ margin: '2rem' }}>
       <div style={{ marginBottom: '2rem' }}>
-        <SelectionBoxes
-          columns={columns}
-          selectedDimension={selectedDimension}
-          setSelectedDimension={setSelectedDimension}
-          selectedMeasure={selectedMeasure}
-          setSelectedMeasure={setSelectedMeasure}
-        />
       </div>
       <LineChart data={data} />
     </div>
