@@ -2,8 +2,11 @@ import { Draggable } from 'react-beautiful-dnd';
 import React from 'react';
 import { List, Typography } from 'antd';
 
-const ColumnListItem = React.memo(({ item, index }) => {
-  console.log({ item });
+function areEqual(prevProps, nextProps) {
+  return prevProps.item.name === nextProps.item.name;
+}
+
+const ColumnListItem = ({ item, index }) => {
   return (
     <Draggable key={item.key} draggableId={item.key} index={index}>
       {provided => {
@@ -26,6 +29,6 @@ const ColumnListItem = React.memo(({ item, index }) => {
       }}
     </Draggable>
   );
-});
+};
 
-export default ColumnListItem;
+export default React.memo(ColumnListItem, areEqual);

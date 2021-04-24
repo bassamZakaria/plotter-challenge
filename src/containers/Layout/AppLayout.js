@@ -28,14 +28,13 @@ export const AppLayout = () => {
   const onDragEnd = result => {
     if (!result.destination) return;
     const { source, destination } = result;
-    console.log({ source });
-    console.log({ destination });
     const sourceItem = columns[source.index];
     if (source.droppableId !== destination.droppableId) {
       if (sourceItem.function === destination.droppableId) {
         if (destination.droppableId === DND.MEASURE) {
-          const tmp = [...selectedMeasure, sourceItem];
-          setSelectedMeasure(tmp);
+          // const tmp = [...selectedMeasure, sourceItem];
+          // setSelectedMeasure(tmp);
+          setSelectedMeasure([sourceItem]);
         } else if (destination.droppableId === DND.DIMENSION) {
           setSelectedDimension([sourceItem]);
         }

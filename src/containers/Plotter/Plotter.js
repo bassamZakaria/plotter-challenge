@@ -3,6 +3,7 @@ import LineChart from '../../components/LineChart/LineChart';
 import { getData } from '../../api/plotterApi';
 import SelectionBox from '../../components/SelectionBox/SelectionBox';
 import { DND } from '../../utils/DnDIds';
+import PlotterStyle from './Plotter.module.scss';
 
 const Plotter = ({ selectedDimension, selectedMeasure }) => {
   const [data, setData] = useState([]);
@@ -14,7 +15,6 @@ const Plotter = ({ selectedDimension, selectedMeasure }) => {
         dimension: selectedDimension[0]?.name,
       });
       if (response.status === 200) {
-        console.log(response.data);
         let tmp = [];
         for (let i = 0; i < 10; i++) {
           tmp.push({
@@ -22,7 +22,6 @@ const Plotter = ({ selectedDimension, selectedMeasure }) => {
             yAxis: response.data[1].values[i],
           });
         }
-        console.log(tmp);
         setData(tmp);
       }
     };
@@ -37,9 +36,9 @@ const Plotter = ({ selectedDimension, selectedMeasure }) => {
   }, [selectedDimension, selectedMeasure]);
 
   return (
-    <div style={{ margin: '2rem' }}>
-      <SelectionBox areaId={DND.DIMENSION} items={selectedDimension} />
-      <SelectionBox areaId={DND.MEASURE} items={selectedMeasure} />
+    <div className={PlotterStyle.root}>
+      <SelectionBox label="Dimension" areaId={DND.DIMENSION} items={selectedDimension} />
+      <SelectionBox label="Measure" areaId={DND.MEASURE} items={selectedMeasure} />
       <LineChart data={data} />
     </div>
   );

@@ -15,12 +15,10 @@ export default () => {
 };
 
 export const requestInterceptor = req => {
-  console.log({ req });
   return Promise.resolve(req);
 };
 
 export const responseInterceptor = error => {
-  console.log({ error });
   notification.error({
     message: 'Error',
     description: error.message ?? 'Error',

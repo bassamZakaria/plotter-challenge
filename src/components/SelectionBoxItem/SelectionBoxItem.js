@@ -7,14 +7,7 @@ const SelectionBoxItem = ({ item, index }) => {
     <Draggable key={item.key} draggableId={item.key} index={index} isDragDisabled={true}>
       {provided => {
         return (
-          <Tag
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            style={{
-              ...provided.draggableProps.style,
-            }}
-          >
+          <Tag ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
             {item.name}
           </Tag>
         );

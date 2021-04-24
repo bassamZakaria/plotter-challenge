@@ -46,3 +46,8 @@
 .ant-list-header {
   padding-left: 1rem;
 }
+
+.ant-btn {
+  border: 1px solid black;
+  border-radius: 0;
+}
