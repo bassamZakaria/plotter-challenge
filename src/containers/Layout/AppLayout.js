@@ -3,9 +3,9 @@ import { Layout, notification } from 'antd';
 import Columns from '../../components/Columns/Columns';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
-import DroppableArea from '../../components/DroppableArea/DroppableArea';
 import { DND } from '../../utils/DnDIds';
 import { getColumns } from '../../api/plotterApi';
+import Plotter from '../Plotter/Plotter';
 
 export const AppLayout = () => {
   const [selectedDimension, setSelectedDimension] = useState([]);
@@ -63,21 +63,10 @@ export const AppLayout = () => {
         <Layout.Sider theme="light" width={241}>
           <Columns columns={columns} />
         </Layout.Sider>
-        <div key={'dimension'}>
-          <DroppableArea areaId={DND.DIMENSION} items={selectedDimension} />
-        </div>
-        <div key={'measure'}>
-          <DroppableArea areaId={DND.MEASURE} items={selectedMeasure} />
-        </div>
+        <Layout>
+          <Plotter selectedDimension={selectedDimension} selectedMeasure={selectedMeasure} />
+        </Layout>
       </DragDropContext>
-      {/*<DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>*/}
-      {/*  <Layout.Sider theme="light" width={241}>*/}
-      {/*    <Columns />*/}
-      {/*  </Layout.Sider>*/}
-      {/*  <Layout>*/}
-      {/*    <Plotter />*/}
-      {/*  </Layout>*/}
-      {/*</DragDropContext>*/}
     </Layout>
   );
 };

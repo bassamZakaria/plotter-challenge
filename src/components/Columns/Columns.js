@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { getColumns } from '../../api/plotterApi';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Droppable } from 'react-beautiful-dnd';
 import ColumnListItem from '../ColumnListItem/ColumnItem';

@@ -1,28 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import LineChart from '../../components/LineChart/LineChart';
-import { getColumns, getData } from '../../api/plotterApi';
+import { getData } from '../../api/plotterApi';
+import DroppableArea from '../../components/DroppableArea/DroppableArea';
+import { DND } from '../../utils/DnDIds';
 
-const Plotter = () => {
-  const [columns, setColumns] = useState([]);
-  const [selectedDimension, setSelectedDimension] = useState('Country');
-  const [selectedMeasure, setSelectedMeasure] = useState(['Cost']);
+const Plotter = ({ selectedDimension, selectedMeasure }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getColumns();
-      if (response?.status === 200) {
-        setColumns(response?.data);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
       const response = await getData({
-        measures: selectedMeasure,
-        dimension: selectedDimension,
+        measures: [selectedMeasure[0]?.name],
+        dimension: selectedDimension[0]?.name,
       });
       if (response.status === 200) {
         console.log(response.data);
@@ -37,15 +26,20 @@ const Plotter = () => {
         setData(tmp);
       }
     };
-    if (selectedDimension && selectedMeasure && selectedMeasure.length !== 0) {
+    if (
+      selectedDimension &&
+      selectedMeasure &&
+      selectedDimension.length !== 0 &&
+      selectedMeasure.length !== 0
+    ) {
       fetchData();
     }
   }, [selectedDimension, selectedMeasure]);
 
   return (
     <div style={{ margin: '2rem' }}>
-      <div style={{ marginBottom: '2rem' }}>
-      </div>
+      <DroppableArea areaId={DND.DIMENSION} items={selectedDimension} />
+      <DroppableArea areaId={DND.MEASURE} items={selectedMeasure} />
       <LineChart data={data} />
     </div>
   );
