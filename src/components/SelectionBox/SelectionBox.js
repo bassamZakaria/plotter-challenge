@@ -4,7 +4,7 @@ import SelectionBoxItem from '../SelectionBoxItem/SelectionBoxItem';
 import { Button, Typography, Row, Col } from 'antd';
 import SelectionBoxStyle from './SelectionBox.module.scss';
 
-const SelectionBox = ({ label, areaId, items, isDropDisabled = false }) => {
+const SelectionBox = ({ label, areaId, items, isDropDisabled = false, onClear }) => {
   return (
     <Row gutter={4} className={SelectionBoxStyle.root}>
       {label && (
@@ -34,7 +34,9 @@ const SelectionBox = ({ label, areaId, items, isDropDisabled = false }) => {
             );
           }}
         </Droppable>
-        <Button style={{ left: -1 }}>Clear</Button>
+        <Button style={{ left: -1 }} onClick={onClear}>
+          Clear
+        </Button>
       </Col>
     </Row>
   );

@@ -5,7 +5,7 @@ import SelectionBox from '../../components/SelectionBox/SelectionBox';
 import { DND } from '../../utils/DnDIds';
 import PlotterStyle from './Plotter.module.scss';
 
-const Plotter = ({ selectedDimension, selectedMeasure }) => {
+const Plotter = ({ selectedDimension, selectedMeasure, clearDimension, clearMeasure }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -32,13 +32,25 @@ const Plotter = ({ selectedDimension, selectedMeasure }) => {
       selectedMeasure.length !== 0
     ) {
       fetchData();
+    } else if (data.length !== 0) {
+      setData([]);
     }
   }, [selectedDimension, selectedMeasure]);
 
   return (
     <div className={PlotterStyle.root}>
-      <SelectionBox label="Dimension" areaId={DND.DIMENSION} items={selectedDimension} />
-      <SelectionBox label="Measure" areaId={DND.MEASURE} items={selectedMeasure} />
+      <SelectionBox
+        label="Dimension"
+        areaId={DND.DIMENSION}
+        items={selectedDimension}
+        onClear={clearDimension}
+      />
+      <SelectionBox
+        label="Measure"
+        areaId={DND.MEASURE}
+        items={selectedMeasure}
+        onClear={clearMeasure}
+      />
       <LineChart data={data} />
     </div>
   );

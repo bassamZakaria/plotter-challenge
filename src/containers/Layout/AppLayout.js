@@ -63,7 +63,12 @@ export const AppLayout = () => {
           <Columns columns={columns} />
         </Layout.Sider>
         <Layout>
-          <Plotter selectedDimension={selectedDimension} selectedMeasure={selectedMeasure} />
+          <Plotter
+            selectedDimension={selectedDimension}
+            selectedMeasure={selectedMeasure}
+            clearDimension={() => setSelectedDimension([])}
+            clearMeasure={() => setSelectedMeasure([])}
+          />
         </Layout>
       </DragDropContext>
     </Layout>
