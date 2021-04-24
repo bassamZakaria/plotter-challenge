@@ -1,8 +1,8 @@
 import { Droppable } from 'react-beautiful-dnd';
 import React from 'react';
-import DraggableItem from '../DraggableItem/DraggableItem';
+import SelectionBoxItem from '../SelectionBoxItem/SelectionBoxItem';
 
-const DroppableArea = ({ areaId, items, isDropDisabled = false }) => {
+const SelectionBox = ({ areaId, items, isDropDisabled = false }) => {
   console.log({ items });
   return (
     <Droppable
@@ -25,7 +25,7 @@ const DroppableArea = ({ areaId, items, isDropDisabled = false }) => {
             }}
           >
             {items.map((item, index) => (
-              <DraggableItem item={item} index={index} />
+              <SelectionBoxItem item={item} index={index} />
             ))}
             {provided.placeholder}
           </div>
@@ -34,4 +34,4 @@ const DroppableArea = ({ areaId, items, isDropDisabled = false }) => {
     </Droppable>
   );
 };
-export default DroppableArea;
+export default SelectionBox;

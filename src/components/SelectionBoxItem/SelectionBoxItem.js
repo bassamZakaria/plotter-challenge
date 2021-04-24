@@ -2,7 +2,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import React from 'react';
 import { Tag } from 'antd';
 
-const DraggableItem = ({ item, index }) => {
+const SelectionBoxItem = ({ item, index }) => {
   return (
     <Draggable key={item.key} draggableId={item.key} index={index} isDragDisabled={true}>
       {provided => {
@@ -22,4 +22,4 @@ const DraggableItem = ({ item, index }) => {
     </Draggable>
   );
 };
-export default DraggableItem;
+export default SelectionBoxItem;

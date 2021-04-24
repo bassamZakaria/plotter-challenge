@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import LineChart from '../../components/LineChart/LineChart';
 import { getData } from '../../api/plotterApi';
-import DroppableArea from '../../components/DroppableArea/DroppableArea';
+import SelectionBox from '../../components/SelectionBox/SelectionBox';
 import { DND } from '../../utils/DnDIds';
 
 const Plotter = ({ selectedDimension, selectedMeasure }) => {
@@ -38,8 +38,8 @@ const Plotter = ({ selectedDimension, selectedMeasure }) => {
 
   return (
     <div style={{ margin: '2rem' }}>
-      <DroppableArea areaId={DND.DIMENSION} items={selectedDimension} />
-      <DroppableArea areaId={DND.MEASURE} items={selectedMeasure} />
+      <SelectionBox areaId={DND.DIMENSION} items={selectedDimension} />
+      <SelectionBox areaId={DND.MEASURE} items={selectedMeasure} />
       <LineChart data={data} />
     </div>
   );
