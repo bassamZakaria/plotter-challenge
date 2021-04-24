@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Droppable } from 'react-beautiful-dnd';
 import ColumnListItem from '../ColumnListItem/ColumnItem';
 import { DND } from '../../utils/DnDIds';
+import { List, Typography } from 'antd';
 
 const Columns = ({ columns }) => {
   return (
@@ -18,10 +19,12 @@ const Columns = ({ columns }) => {
               height: '100%',
             }}
           >
-            {columns.map((item, index) => (
-              <ColumnListItem key={uuidv4()} item={item} index={index} />
-            ))}
-            {provided.placeholder}
+            <List header={<Typography.Title level={2}>Columns</Typography.Title>}>
+              {columns.map((item, index) => (
+                <ColumnListItem key={uuidv4()} item={item} index={index} />
+              ))}
+              {provided.placeholder}
+            </List>
           </div>
         );
       }}

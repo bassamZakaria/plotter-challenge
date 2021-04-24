@@ -1,5 +1,6 @@
 import { Draggable } from 'react-beautiful-dnd';
 import React from 'react';
+import { List, Typography } from 'antd';
 
 const ColumnListItem = React.memo(({ item, index }) => {
   console.log({ item });
@@ -15,7 +16,11 @@ const ColumnListItem = React.memo(({ item, index }) => {
               ...provided.draggableProps.style,
             }}
           >
-            {item.name} {item.function}
+            <List.Item>
+              <Typography.Text>
+                {item.name} ({item.function})
+              </Typography.Text>
+            </List.Item>
           </div>
         );
       }}
