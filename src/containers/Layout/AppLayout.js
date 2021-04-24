@@ -34,9 +34,9 @@ export const AppLayout = () => {
         if (destination.droppableId === DND.MEASURE) {
           // const tmp = [...selectedMeasure, sourceItem];
           // setSelectedMeasure(tmp);
-          setSelectedMeasure([sourceItem]);
+          setSelectedMeasure([{ ...sourceItem, key: uuidv4() }]);
         } else if (destination.droppableId === DND.DIMENSION) {
-          setSelectedDimension([sourceItem]);
+          setSelectedDimension([{ ...sourceItem, key: uuidv4() }]);
         }
       } else
         notification.warning({

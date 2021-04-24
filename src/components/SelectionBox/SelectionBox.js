@@ -27,7 +27,7 @@ const SelectionBox = ({ label, areaId, items, isDropDisabled = false }) => {
                 className={SelectionBoxStyle.dragBox}
               >
                 {items.map((item, index) => (
-                  <SelectionBoxItem item={item} index={index} />
+                  <SelectionBoxItem key={item.name} item={item} index={index} />
                 ))}
                 {provided.placeholder}
               </div>
