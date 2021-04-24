@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Layout, notification } from 'antd';
 import Columns from '../../components/Columns/Columns';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { v4 as uuidv4, v4 as uuid } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import DroppableArea from '../../components/DroppableArea/DroppableArea';
 import { DND } from '../../utils/DnDIds';
 import { getColumns } from '../../api/plotterApi';
@@ -30,37 +30,20 @@ export const AppLayout = () => {
     const { source, destination } = result;
     console.log({ source });
     console.log({ destination });
+    const sourceItem = columns[source.index];
     if (source.droppableId !== destination.droppableId) {
-      const sourceItem = columns[source.index];
-      const tmp = [...selectedMeasure, sourceItem];
-      setSelectedMeasure(tmp);
-      // const destColumn = columns[destination.droppableId];
-      // const sourceItems = [...sourceColumn.items];
-      // const destItems = [...destColumn.items];
-      //   const item = sourceItems[source.index];
-      //   if (item.type === destination.droppableId) {
-      //     const [removed] = sourceItems.splice(source.index, 1);
-      //     destItems.splice(destination.index, 0, removed);
-      //     const tmp = {
-      //       ...columns,
-      //       [source.droppableId]: {
-      //         ...sourceColumn,
-      //         items: sourceItems,
-      //       },
-      //       [destination.droppableId]: {
-      //         ...destColumn,
-      //         items: destItems,
-      //       },
-      //     };
-      //     setColumns(tmp);
-      //   } else {
-      //     notification.warning({
-      //       message: 'Warning',
-      //       description: 'Type has to be the same',
-      //     });
-      //   }
-    } else {
-      console.log('drop on the same');
+      if (sourceItem.function === destination.droppableId) {
+        if (destination.droppableId === DND.MEASURE) {
+          const tmp = [...selectedMeasure, sourceItem];
+          setSelectedMeasure(tmp);
+        } else if (destination.droppableId === DND.DIMENSION) {
+          setSelectedDimension([sourceItem]);
+        }
+      } else
+        notification.warning({
+          message: 'Warning',
+          description: 'Type has to be the same',
+        });
     }
   };
 

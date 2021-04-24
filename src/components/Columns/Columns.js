@@ -20,7 +20,7 @@ const Columns = ({ columns }) => {
             }}
           >
             {columns.map((item, index) => (
-              <ColumnListItem item={item} index={index} />
+              <ColumnListItem key={uuidv4()} item={item} index={index} />
             ))}
             {provided.placeholder}
           </div>
