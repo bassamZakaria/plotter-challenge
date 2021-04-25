@@ -42,7 +42,7 @@ const Plotter = ({ selectedDimension, selectedMeasure, clearDimension, clearMeas
     } else if (data.length !== 0) {
       setData([]);
     }
-  }, [selectedDimension, selectedMeasure]);
+  }, [selectedDimension, selectedMeasure, data.length]);
 
   return (
     <div className={PlotterStyle.root}>
