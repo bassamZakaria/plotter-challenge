@@ -1,7 +1,7 @@
 import React from 'react';
 import { Line } from '@ant-design/charts';
 
-const LineChart = ({ data }) => {
+const AntLineChart = ({ data }) => {
   const config = {
     data,
     xField: 'xAxis',
@@ -13,6 +13,6 @@ const LineChart = ({ data }) => {
     AxisLabelCfg: { autoEllipsis: true },
   };
 
-  return <Line {...config} />;
+  return <Line data-testid={'line-chart'} {...config} />;
 };
-export default LineChart;
+export default AntLineChart;

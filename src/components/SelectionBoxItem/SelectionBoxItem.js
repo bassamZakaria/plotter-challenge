@@ -7,7 +7,12 @@ const SelectionBoxItem = ({ item, index }) => {
     <Draggable key={item.key} draggableId={item.key} index={index} isDragDisabled={true}>
       {provided => {
         return (
-          <Tag ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+          <Tag
+            data-testid={`${item.key}-tag-id`}
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
             {item.name}
           </Tag>
         );

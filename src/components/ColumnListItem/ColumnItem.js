@@ -8,10 +8,11 @@ function areEqual(prevProps, nextProps) {
 
 const ColumnListItem = ({ item, index }) => {
   return (
-    <Draggable key={item.key} draggableId={item.key} index={index}>
+    <Draggable key={item?.key} draggableId={item?.key} index={index}>
       {provided => {
         return (
           <div
+            data-testid={'column-item-id'}
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
@@ -21,7 +22,7 @@ const ColumnListItem = ({ item, index }) => {
           >
             <List.Item>
               <Typography.Text>
-                {item.name} ({item.function})
+                {item?.name} ({item?.function})
               </Typography.Text>
             </List.Item>
           </div>

@@ -6,7 +6,7 @@ import SelectionBoxStyle from './SelectionBox.module.scss';
 
 const SelectionBox = ({ label, areaId, items, isDropDisabled = false, onClear }) => {
   return (
-    <Row gutter={4} className={SelectionBoxStyle.root}>
+    <Row data-testid={`${label}-selection-box`} gutter={4} className={SelectionBoxStyle.root}>
       {label && (
         <Col span={2}>
           <Typography.Text>{label}</Typography.Text>
@@ -34,7 +34,7 @@ const SelectionBox = ({ label, areaId, items, isDropDisabled = false, onClear })
             );
           }}
         </Droppable>
-        <Button style={{ left: -1 }} onClick={onClear}>
+        <Button style={{ left: -1 }} onClick={onClear} data-testid="clear-button">
           Clear
         </Button>
       </Col>

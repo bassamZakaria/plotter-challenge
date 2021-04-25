@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import LineChart from '../../components/LineChart/LineChart';
+import AntLineChart from '../../components/AntLineChart/AntLineChart';
 import { getData } from '../../api/plotterApi';
 import SelectionBox from '../../components/SelectionBox/SelectionBox';
 import { DND } from '../../utils/DnDIds';
@@ -46,12 +46,13 @@ const Plotter = ({ selectedDimension, selectedMeasure, clearDimension, clearMeas
         onClear={clearDimension}
       />
       <SelectionBox
+        data-testid="measure-selection-box"
         label="Measure"
         areaId={DND.MEASURE}
         items={selectedMeasure}
         onClear={clearMeasure}
       />
-      <LineChart data={data} />
+      {data && data?.length !== 0 && <AntLineChart data={data} />}
     </div>
   );
 };
