@@ -4,6 +4,7 @@ import { getData } from '../../api/plotterApi';
 import SelectionBox from '../../components/SelectionBox/SelectionBox';
 import { DND } from '../../utils/DnDIds';
 import PlotterStyle from './Plotter.module.scss';
+import { notification } from 'antd';
 
 const Plotter = ({ selectedDimension, selectedMeasure, clearDimension, clearMeasure }) => {
   const [data, setData] = useState([]);
@@ -14,15 +15,21 @@ const Plotter = ({ selectedDimension, selectedMeasure, clearDimension, clearMeas
         measures: [selectedMeasure[0]?.name],
         dimension: selectedDimension[0]?.name,
       });
-      if (response.status === 200) {
+      //Assumption dimension always the first and dimension and measure have the same length always
+      if (response?.status === 200 && response?.data?.length > 1) {
         let tmp = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < response?.data[0]?.values?.length; i++) {
           tmp.push({
             xAxis: response.data[0].values[i],
             yAxis: response.data[1].values[i],
           });
         }
         setData(tmp);
+      } else {
+        notification.error({
+          message: 'Error',
+          description: 'Data is not as expected',
+        });
       }
     };
     if (
