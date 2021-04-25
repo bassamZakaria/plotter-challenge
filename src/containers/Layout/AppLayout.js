@@ -8,7 +8,7 @@ import { getColumns } from '../../api/plotterApi';
 import Plotter from '../Plotter/Plotter';
 
 export const AppLayout = () => {
-  //we could use redux but it isn't needed that much as we only passing states 2 level directly
+  //we could use redux but it isn't needed that much as we only passing states 2 level down directly
   //useContext isn't the best option due to performance issues and especially with arrays and objects
   const [selectedDimension, setSelectedDimension] = useState([]);
   const [selectedMeasure, setSelectedMeasure] = useState([]);
