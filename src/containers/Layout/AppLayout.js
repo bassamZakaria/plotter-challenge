@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, notification } from 'antd';
+import { Spin, Layout, notification } from 'antd';
 import Columns from '../../components/Columns/Columns';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,14 +13,17 @@ export const AppLayout = () => {
   const [selectedDimension, setSelectedDimension] = useState([]);
   const [selectedMeasure, setSelectedMeasure] = useState([]);
   const [columns, setColumns] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       const response = await getColumns();
       if (response?.status === 200) {
         const tmp = response?.data.map(item => {
           return { ...item, key: uuidv4() };
         });
+        setIsLoading(false);
         setColumns(tmp);
       }
     };
@@ -49,30 +52,32 @@ export const AppLayout = () => {
   };
 
   return (
-    <Layout style={{ minHeight: '100vh' }} data-testid="root">
-      <DragDropContext
-        onDragEnd={result =>
-          onDragEnd(
-            result,
-            selectedDimension,
-            setSelectedDimension,
-            selectedMeasure,
-            setSelectedMeasure
-          )
-        }
-      >
-        <Layout.Sider theme="light" width={241}>
-          <Columns columns={columns} />
-        </Layout.Sider>
-        <Layout>
-          <Plotter
-            selectedDimension={selectedDimension}
-            selectedMeasure={selectedMeasure}
-            clearDimension={() => setSelectedDimension([])}
-            clearMeasure={() => setSelectedMeasure([])}
-          />
-        </Layout>
-      </DragDropContext>
-    </Layout>
+    <Spin spinning={isLoading} size="large" tip="Loading...">
+      <Layout style={{ minHeight: '100vh' }} data-testid="root">
+        <DragDropContext
+          onDragEnd={result =>
+            onDragEnd(
+              result,
+              selectedDimension,
+              setSelectedDimension,
+              selectedMeasure,
+              setSelectedMeasure
+            )
+          }
+        >
+          <Layout.Sider theme="light" width={241}>
+            <Columns columns={columns} />
+          </Layout.Sider>
+          <Layout>
+            <Plotter
+              selectedDimension={selectedDimension}
+              selectedMeasure={selectedMeasure}
+              clearDimension={() => setSelectedDimension([])}
+              clearMeasure={() => setSelectedMeasure([])}
+            />
+          </Layout>
+        </DragDropContext>
+      </Layout>
+    </Spin>
   );
 };
