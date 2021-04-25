@@ -52,6 +52,7 @@ export const AppLayout = () => {
   };
 
   return (
+    //we could use suspense and fallback to show spinner also
     <Spin spinning={isLoading} size="large" tip="Loading...">
       <Layout style={{ minHeight: '100vh' }} data-testid="root">
         <DragDropContext
